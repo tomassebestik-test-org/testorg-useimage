@@ -1,0 +1,36 @@
+name: Test use `pyenv_python` image
+
+on: [workflow_dispatch]
+
+# --------------------------------------------------------
+jobs:
+  incontainer_test:
+    container:
+      image: ghcr.io/tomassebestik-test-org/testorg-createimage/pyenv_python:latest
+      # credentials:
+      #   username: ${{ github.actor }}
+      #   password: ${{secrets.CR_PAT}}
+      options: --privileged
+    runs-on: ubuntu-latest
+    steps:
+      # --------------------------------------------------------
+      - uses: actions/checkout@v2
+      # --------------------------------------------------------
+      - name: Show system info
+        run: |
+          cat /etc/os-release
+      # --------------------------------------------------------
+      - name: Install usbutils
+        run: |
+          apt-get update && 
+          apt-get install -y usbutils
+      # --------------------------------------------------------
+      - name: Show current python version
+        run: |
+          python --version
+      # --------------------------------------------------------
+      - name: Switch to python 3.10.2
+        run: |
+          pyenv global 3.10.2
+          python --version
+# -------------------------------------------------------
