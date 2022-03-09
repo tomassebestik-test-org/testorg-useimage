@@ -1,4 +1,4 @@
-name: Test use `pyenv_python` image
+name: ORGTOMASTEST - Use `pyenv_python` image
 
 on: [workflow_dispatch]
 
@@ -6,10 +6,7 @@ on: [workflow_dispatch]
 jobs:
   incontainer_test:
     container:
-      image: ghcr.io/tomassebestik-test-org/testorg-createimage/pyenv_python:latest
-      # credentials:
-      #   username: ${{ github.actor }}
-      #   password: ${{secrets.CR_PAT}}
+      image: ghcr.io/tomassebestik-test-org/testorg-createimage/pyenv_python:v1
       options: --privileged
     runs-on: ubuntu-latest
     steps:
